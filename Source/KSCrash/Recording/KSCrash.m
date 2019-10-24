@@ -511,6 +511,10 @@ SYNTHESIZE_CRASH_STATE_PROPERTY(BOOL, crashedLastLaunch)
 - (NSArray*) allReports
 {
     int reportCount = kscrash_getReportCount();
+    if(!reportCount)
+    {
+        return nil;
+    }
     int64_t reportIDs[reportCount];
     reportCount = kscrash_getReportIDs(reportIDs, reportCount);
     NSMutableArray* reports = [NSMutableArray arrayWithCapacity:(NSUInteger)reportCount];
